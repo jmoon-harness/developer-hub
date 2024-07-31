@@ -773,3 +773,47 @@ By following these steps, you can effectively manage and exclude the "No Cluster
 #### When we set a budget in the CCM module, is there a way to incorporate discounts?
 
 Yes, since budgets are based on Perspectives, we can also incorporate built-in cloud discounts.
+
+#### My Azure connector see the error “Invalid Request: No billing export file is found in last 24hrs in”
+
+This happens as it is the first day of the month and the folder has not been created yet in the source azure-storage bucket where export exists. There is a lag of ~2 days in Azure exports (from source itself), then this will be resolved automatically.
+
+#### Can Dashboards pull the latest deployments?
+
+Currently, there is not a field that can pull a “live” version of the service that is being shown in the dashboard.
+
+#### Why are my budget dates showing not on the 1st?
+
+When creating a budget, make sure the budget start date is a date within the current time period set.
+
+#### Why is my budget growth rate now increasing?
+
+The budget growth rate is set to increase at the next budget time period. EX: if the time period is monthly, the next month the budget will increase.
+
+#### Why can I not view all my list in a dashboard?
+
+The current default display on a filter type is 50 records on the dashboard.
+
+#### How can I set up a dashboard with pipeline details and have it auto generate notifications?
+
+Custom Dashboards can be created that shows pipeline information and then Scheduled Delivery can be set on the dashboard to be sent out as a email at a given time. 
+
+#### Why is my cluster not showing in the dashboard?
+
+Make sure there a CCM connector that is connected to the cluster you are looking for in the dashboard.
+
+#### Can an auto stopping rule shutdown services on the VM before it shuts down the vm?
+    
+Auto Stopping rules are set to only talk to the VM itself for shutdown and spin up. It won't be able to access any of the services on the VM itself.
+
+#### How can you get Budget API to show the correct months?
+    
+You will need to set the correct timestamp "budgetMonthlyBreakdown": { "budgetBreakdown": "MONTHLY", "budgetMonthlyAmount": [ { "time": 1685577600000, "value": 20000.0, } , where time is set in Unix.
+
+#### How come a user cannot see the Dashboard when I added permissions to view?
+    
+Confirm that the user is added to the correct permissions at the account level. Dashboards are all going to be stored in the Account level so the permissions will all be associated at the account level. The dashboard permissions won't work via org and project levels. 
+
+#### Connector suddenly cannot access CUR after changing directory path.
+
+This may be caused by the CUR report may have failed to generate on the cloud provider side. Please check the report and have it regenerated.
